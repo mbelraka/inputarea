@@ -26,6 +26,7 @@ function Input(el) {
   this.events = events(el, this);
   this.events.bind('keydown');
   this.events.bind('keyup');
+  this.events.bind('paste');
   this.el = el;
 }
 
@@ -75,6 +76,10 @@ Input.prototype.onkeyup = function(e){
   this.clear();
   e.preventDefault();
   this.classes.remove('multiline');
+};
+
+Input.prototype.onpaste = function(e){
+
 };
 
 /**
