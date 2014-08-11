@@ -6,6 +6,7 @@
 var Emitter = require('emitter');
 var classes = require('classes');
 var events = require('events');
+var debounce = require('debounce');
 
 /**
  * Expose `Input`.
