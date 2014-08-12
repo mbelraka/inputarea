@@ -6,7 +6,6 @@
 var Emitter = require('emitter');
 var classes = require('classes');
 var events = require('events');
-var debounce = require('debounce');
 
 /**
  * Expose `Input`.
@@ -71,7 +70,7 @@ Input.prototype.onkeyup = function(e){
 
   // input mode
   if (typeof this.cleanedValue != 'undefined') {
-    val = this.cleanedValue();
+    val = this.cleanedValue(1);
   }
   this.emit('input', val);
   this.clear();
@@ -79,9 +78,15 @@ Input.prototype.onkeyup = function(e){
   this.classes.remove('multiline');
 };
 
-Input.prototype.onpaste = function(e){
-
+Input.prototype.onpaste = function(){
+  this.events.bind('input');
 };
+
+Input.prototype.oninput = function(){
+  this.el.innerHTML = this.cleanedValue(0);
+  this.events.unbind('input');
+
+}
 
 /**
  * Clear input.
